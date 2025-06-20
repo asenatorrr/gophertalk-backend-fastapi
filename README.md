@@ -5,7 +5,7 @@ This is my simple-stupid project to train FastAPI and SQL... and to torment my [
 
 ### Requirements installing
 ```bash
-pip install fastapi psycopg psycopg-binary psycopg_pool python-dotenv pydantic "python-jose[cryptography]" bcrypt httpx pytest "uvicorn[standard]"
+pip install fastapi psycopg psycopg-binary psycopg_pool python-dotenv pydantic "python-jose[cryptography]" bcrypt httpx pytest "uvicorn[standard]" regex
 ```
 
 ### Database creating
