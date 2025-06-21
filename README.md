@@ -12,9 +12,9 @@ pip install fastapi psycopg psycopg-binary psycopg_pool python-dotenv pydantic "
 ```sql
 CREATE TABLE users (
     id bigserial,
-    user_name VARCHAR(3),
-    first_name VARCHAR(3),
-    last_name VARCHAR(3),
+    user_name VARCHAR(30),
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
     password_hash VARCHAR(72),
     status SMALLINT,
     created_at TIMESTAMP DEFAULT now(),
