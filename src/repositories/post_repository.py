@@ -173,7 +173,7 @@ def delete_post(post_id: int, owner_id: int) -> None:
     query = """
         UPDATE posts
         SET deleted_at = now()
-        WHERE id = %s AND user_id = %s AND deleted_at IS NOT NULL;
+        WHERE id = %s AND user_id = %s AND deleted_at IS NULL;
     """
     with pool.connection() as conn:
         with conn.cursor() as cur:
