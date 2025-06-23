@@ -29,7 +29,7 @@ def get_by_id(user_id: int = Path(..., gt=0)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
 
-@router.put("/{user_id}", response_model=ReadUserDTO)
+@router.patch("/{user_id}", response_model=ReadUserDTO)
 def update_by_id(user_id: int, dto: UpdateUserDTO):
     try:
         return update_user(user_id, dto.model_dump())

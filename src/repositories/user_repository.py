@@ -70,16 +70,16 @@ def update_user(user_id: int, dto: dict) -> dict:
     fields = []
     values = []
 
-    if "password_hash" in dto:
+    if "password_hash" in dto and dto["password_hash"]:
         fields.append("password_hash = %s")
         values.append(dto["password_hash"])
-    if "user_name" in dto:
+    if "user_name" in dto and dto["user_name"]:
         fields.append("user_name = %s")
         values.append(dto["user_name"])
-    if "first_name" in dto:
+    if "first_name" in dto and dto["first_name"]:
         fields.append("first_name = %s")
         values.append(dto["first_name"])
-    if "last_name" in dto:
+    if "last_name" in dto and dto["last_name"]:
         fields.append("last_name = %s")
         values.append(dto["last_name"])
 
