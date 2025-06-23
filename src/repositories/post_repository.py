@@ -23,7 +23,7 @@ def create_post(dto: dict) -> dict:
 
 
 def get_all_posts(dto: dict) -> list[dict]:
-    params = [dto["user_id"]]
+    params = [dto["user_id"], dto["user_id"]]
     query = """
         WITH likes_count AS (
             SELECT post_id, COUNT(*) AS likes_count
