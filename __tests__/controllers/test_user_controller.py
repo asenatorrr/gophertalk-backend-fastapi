@@ -69,25 +69,25 @@ def test_get_user_by_id_not_found(mock_token_header):
 
 def test_update_user_success(mock_token_header, mock_user_dto, mock_update_dto):
     with patch("controllers.user_controller.update_user", return_value=mock_update_dto):
-        res = client.put("/api/users/1", headers=mock_token_header, json=mock_user_dto)
+        res = client.patch("/api/users/1", headers=mock_token_header, json=mock_user_dto)
         assert res.status_code == 200
         assert res.json() == mock_update_dto
 
 
 def test_update_user_invalid_id(mock_token_header):
-    res = client.put("/api/users/abc", headers=mock_token_header, json={})
+    res = client.patch("/api/users/abc", headers=mock_token_header, json={})
     assert res.status_code == 422
 
 
 def test_update_user_validation_fail(mock_token_header):
     invalid_dto = {"user_name": "x"}
-    res = client.put("/api/users/1", headers=mock_token_header, json=invalid_dto)
+    res = client.patch("/api/users/1", headers=mock_token_header, json=invalid_dto)
     assert res.status_code == 422
 
 
 def test_update_user_service_error(mock_token_header,mock_update_dto):
     with patch("controllers.user_controller.update_user", side_effect=Exception("Service error")):
-        res = client.put("/api/users/1", headers=mock_token_header, json=mock_update_dto)
+        res = client.patch("/api/users/1", headers=mock_token_header, json=mock_update_dto)
         assert res.status_code == 400
 
 
