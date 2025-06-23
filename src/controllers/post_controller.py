@@ -11,9 +11,8 @@ from services.post_service import (
     dislike_post,
 )
 from dto.post_dto import DetailedPostReadDTO, PostCreateDTO, PostReadDTO, PostFilterDTO
-from dependencies.auth import get_current_user
+from dependencies.auth import get_current_user, TokenPayload
 
-from src.dependencies.auth import TokenPayload
 
 router = APIRouter(prefix="/posts", tags=["Posts"])
 
