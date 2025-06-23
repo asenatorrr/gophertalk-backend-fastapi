@@ -64,6 +64,3 @@ class ReadUserDTO(BaseModel):
     first_name: Optional[str]
     last_name: Optional[str]
     status: int
-
-    class Config:
-        orm_mode = True
