@@ -8,7 +8,7 @@ ALGORITHM = "HS256"
 
 
 class TokenPayload(BaseModel):
-    sub: str  # ID пользователя
+    sub: int  # ID пользователя
     exp: int  # время жизни токена
 
 
@@ -29,6 +29,6 @@ def get_current_user(request: Request) -> TokenPayload:
 
 
 def verify_same_user(user_id: int, token: TokenPayload = Depends(get_current_user)):
-    if int(token.sub) != int(user_id):
+    if token.sub != int(user_id):
         raise HTTPException(status_code=401, detail="Forbidden")
     return token
