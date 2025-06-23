@@ -1,32 +1,27 @@
 import bcrypt
 
-from repositories.user_repository import (
-    get_all_users,
-    get_user_by_id,
-    update_user,
-    delete_user,
-)
+from repositories import user_repository
 
 
-def get_all(limit: int, offset: int) -> list[dict]:
-    return get_all_users(limit, offset)
+def get_all_users(limit: int, offset: int) -> list[dict]:
+    return user_repository.get_all_users(limit, offset)
 
 
-def get_by_id(user_id: int) -> dict:
-    return get_user_by_id(user_id)
+def get_user_by_id(user_id: int) -> dict:
+    return user_repository.get_user_by_id(user_id)
 
 
-def update(user_id: int, dto: dict) -> dict:
+def update_user(user_id: int, dto: dict) -> dict:
     update_fields = dict(dto)
 
     if "password" in update_fields:
         update_fields["password_hash"] = bcrypt.hashpw(
             update_fields["password"].encode(), bcrypt.gensalt()
-        )
+        ).decode()
         del update_fields["password"]
 
-    return update_user(user_id, update_fields)
+    return user_repository.update_user(user_id, update_fields)
 
 
-def delete(user_id: int) -> None:
-    return delete_user(user_id)
+def delete_user(user_id: int) -> None:
+    return user_repository.delete_user(user_id)
