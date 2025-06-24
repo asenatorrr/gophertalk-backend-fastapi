@@ -45,3 +45,7 @@ class RegisterDTO(LoginDTO):
         if "password" in values and v != values["password"]:
             raise ValueError("Passwords must match")
         return v
+
+
+class RefreshDTO(BaseModel):
+    refresh_token: str

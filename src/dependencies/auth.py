@@ -3,8 +3,8 @@ from jose import jwt, JWTError
 from pydantic import BaseModel
 from os import getenv
 
-JWT_SECRET = getenv("ACCESS_TOKEN_SECRET")
-ALGORITHM = "HS256"
+ACCESS_TOKEN_SECRET = getenv("ACCESS_TOKEN_SECRET")
+ALGORITHM = getenv("ALGORITHM")
 
 
 class TokenPayload(BaseModel):
@@ -20,12 +20,12 @@ def get_current_user(request: Request) -> TokenPayload:
     token = auth_header[7:]  # убираем "Bearer "
 
     try:
-        payload = jwt.decode(token, JWT_SECRET, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, ACCESS_TOKEN_SECRET, algorithms=[ALGORITHM])
         user = TokenPayload(**payload)
         request.state.user = user
         return user
-    except JWTError:
-        raise HTTPException(status_code=401, detail="Invalid token")
+    except JWTError as e:
+        raise HTTPException(status_code=401, detail=str(e))
 
 
 def verify_same_user(user_id: int, token: TokenPayload = Depends(get_current_user)):
