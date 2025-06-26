@@ -16,7 +16,7 @@ CREATE TABLE users (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     password_hash VARCHAR(72),
-    status SMALLINT,
+    status SMALLINT DEFAULT 0,
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP,
