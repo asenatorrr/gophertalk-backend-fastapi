@@ -55,15 +55,15 @@ def get_all_posts(dto: dict) -> list[dict]:
         WHERE p.deleted_at IS NULL
     """
 
-    if "search" in dto and dto["search"]:
+    if dto.get("search"):
         query += f" AND p.text ILIKE %s"
         params.append(f"%{dto['search']}%")
 
-    if "owner_id" in dto and dto["owner_id"]:
+    if dto.get("owner_id"):
         query += f" AND p.user_id = %s"
         params.append(dto["owner_id"])
 
-    if "reply_to_id" in dto and dto["reply_to_id"]:
+    if dto.get("reply_to_id"):
         query += f" AND p.reply_to_id = %s ORDER BY p.created_at ASC"
         params.append(dto["reply_to_id"])
     else:

@@ -42,7 +42,7 @@ class RegisterDTO(LoginDTO):
 
     @validator("password_confirm")
     def passwords_match(cls, v, values):
-        if "password" in values and v != values["password"]:
+        if v != values.get("password"):
             raise ValueError("Passwords must match")
         return v
 
