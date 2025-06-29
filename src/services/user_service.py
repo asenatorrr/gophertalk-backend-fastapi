@@ -14,7 +14,7 @@ def get_user_by_id(user_id: int) -> dict:
 def update_user(user_id: int, dto: dict) -> dict:
     update_fields = dict(dto)
 
-    if "password" in update_fields:
+    if update_fields.get("password"):
         update_fields["password_hash"] = bcrypt.hashpw(
             update_fields["password"].encode(), bcrypt.gensalt()
         ).decode()
